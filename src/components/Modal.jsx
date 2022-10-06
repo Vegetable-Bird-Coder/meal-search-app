@@ -1,6 +1,24 @@
+import { useState } from "react";
+import { useGlobalContext } from "../context";
+
 const Modals = () => {
+    const { selectedMeal, closeModal } = useGlobalContext();
+
+    const { strMealThumb: image, strMeal: title, strInstructions: text, strSource: source } = selectedMeal;
+
     return (
-        <h1>Modals Component</h1>
+        <aside className="modal-overlay">
+            <div className="modal-container">
+                <img src={image} alt={title} className="img modal-img" />
+                <div className="modal-content">
+                    <h4>{title}</h4>
+                    <p>Cooking Instructions</p>
+                    <p>{text}</p>
+                    <a href={source} target="_blank">Origin Source</a>
+                    <button onClick={closeModal} className="btn btn-hipster close-btn">Close</button>
+                </div>
+            </div>
+        </aside>
     )
 }
 
